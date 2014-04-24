@@ -1,12 +1,15 @@
 {
-    "name": "bae-nodejs",
+    "name": "startup-news",
     "version": "1.0.0",
-    "author": "bae",
-    "description": "The first bae nodejs app!",
+    "private": true,
+    "author": { "name": "Firede", "email": "firede@firede.us" },
+    "description": "Startup News Crawler & API",
     "scripts": {
         "start": "node server.js"
     },
     "dependencies": {
+        "express": "4.0.0",
+        "simplecrawler": "0.3.8",
+        "lru-cache": "~2.5.0"
     }
 }
-
