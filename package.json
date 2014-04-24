@@ -5,11 +5,10 @@
     "author": { "name": "Firede", "email": "firede@firede.us" },
     "description": "Startup News Crawler & API",
     "scripts": {
-        "start": "node server.js"
+        "start": "node app.js"
     },
     "dependencies": {
         "express": "4.0.0",
-        "simplecrawler": "0.3.8",
-        "lru-cache": "~2.5.0"
+        "cheerio": "0.15.0"
     }
 }
