@@ -68,7 +68,8 @@ Feed.prototype.parse = function () {
         var item = $(item);
         // more
         if (hasMore && i === itemLen - 1) {
-            obj.more = item
+            obj.condition = {};
+            obj.condition.more = item
                 .find('a:contains(More)')
                 .attr('href')
                 .replace('/x?fnid=', '');

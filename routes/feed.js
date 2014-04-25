@@ -16,13 +16,18 @@ function feedHandler(req, res, type) {
 
     feed.init(type, page);
 
-    feed.on('complete', function (json) {
-        res.jsonp(json);
+    feed.on('complete', function (data) {
+        res.jsonp({
+            status: 0,
+            data: data
+        });
     });
 
     feed.on('error', function (err) {
-        console.error(err);
-        res.send(500);
+        res.jsonp({
+            status: 2,
+            statusInfo: err
+        });
     });
 
     feed.fetch();
