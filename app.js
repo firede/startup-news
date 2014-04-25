@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 
 app.use('/feed', require('./routes/feed'));
+app.use('/post', require('./routes/post'));
 
 // catch 404 and forwarding to error handler
 app.use(function (req, res, next) {

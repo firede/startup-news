@@ -1,5 +1,6 @@
 var cheerio = require('cheerio');
 var EventEmitter = require('events').EventEmitter;
+var extractCreateDate = require('../util').extractCreateDate;
 
 /**
  * Feed
@@ -110,6 +111,10 @@ Feed.prototype.parse = function () {
                 var pointsStr = pointsEl.text();
                 data[index].points = parseInt(pointsStr, 10) || 0;
                 data[index].id = pointsEl.attr('id').split('_')[1];
+
+                // create date
+                var createDateStr = item.find('.subtext').text();
+                data[index].createDate = extractCreateDate(createDateStr);
 
                 // author
                 var author = item.find('a[href^=user]').text();
