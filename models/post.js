@@ -73,7 +73,11 @@ Post.prototype.parse = function() {
     detail.createDate = extractCreateDate(detailItem.find('.subtext').text());
 
     // content
-    detail.content = detailItem.find('tr:nth-child(4) td:nth-child(2)').html();
+    var detailContent = detailItem.find('tr:nth-child(4) td:nth-child(2)').html();
+    if (detailContent.indexOf('<textarea') !== -1) {
+        detailContent = '';
+    }
+    detail.content = detailContent;
 
     obj.detail = detail;
 
