@@ -96,7 +96,12 @@ Feed.prototype.parse = function () {
                 // title & url
                 var titleEl = item.find('.title a');
                 data[index].title = titleEl.text();
-                data[index].url = titleEl.attr('href');
+
+                var itemUrl = titleEl.attr('href');
+                if (itemUrl.indexOf('item?') === 0) {
+                    itemUrl = 'http://news.dbanotes.net/' + itemUrl;
+                }
+                data[index].url = itemUrl;
 
                 // source
                 var sourceStr = item.find('.comhead').text();
