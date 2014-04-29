@@ -1,0 +1,2 @@
+/*! 2014 Baidu Inc. All Rights Reserved */
+define("config",function(require){return[{path:"/index",action:require("./list/hot"),index:101,cached:!0},{path:"/list/new",action:require("./list/new"),index:102,cached:!0},{path:"/post/:id",action:require("./post/index"),index:201}]});

@@ -1,10 +1,19 @@
 var express = require('express');
 var compress = require('compression');
 var morgan  = require('morgan');
+var serveStatic = require('serve-static');
 
 var app = express();
 app.use(compress());
 app.use(morgan('short'));
+
+app.use(
+    serveStatic(
+        'public', {
+            'index': ['index.html']
+        }
+    )
+);
 
 app.use('/feed', require('./routes/feed'));
 app.use('/post', require('./routes/post'));

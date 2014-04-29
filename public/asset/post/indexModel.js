@@ -1,0 +1,2 @@
+/*! 2014 Baidu Inc. All Rights Reserved */
+define("post/indexModel",function(require){var t=require("saber-promise"),e=require("saber-ajax/ejson"),n="/post/",i={};return i.fetch=function(i){if(!i.id)return t.resolved({detail:{},comments:[]});var r=n+i.id;return e.get(r)},i});
