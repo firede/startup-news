@@ -47,6 +47,10 @@ Post.prototype.parse = function() {
     // create date
     detail.createDate = extractCreateDate(detailItem.find('.subtext').text());
 
+    // points
+    var detailPointsStr = detailItem.find('[id^=score]').text();
+    detail.points = parseInt(detailPointsStr, 10);
+
     // content
     var detailContent = detailItem.find('tr:nth-child(4) td:nth-child(2)').html();
     if (!detailContent || detailContent.indexOf('<textarea') !== -1) {
