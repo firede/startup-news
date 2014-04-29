@@ -2,13 +2,17 @@
     "name": "startup-news",
     "version": "1.0.0",
     "private": true,
-    "author": { "name": "Firede", "email": "firede@firede.us" },
+    "author": {
+        "name": "Firede",
+        "email": "firede@firede.us"
+    },
     "description": "Startup News Crawler & API",
     "scripts": {
         "start": "node app.js"
     },
     "dependencies": {
-        "express": "4.0.0",
-        "cheerio": "0.15.0"
+        "cheerio": "0.15.0",
+        "compression": "^1.0.2",
+        "express": "~4.1.1"
     }
 }
