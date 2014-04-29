@@ -1,4 +1,5 @@
 var EventEmitter = require('events').EventEmitter;
+var cache = require('memory-cache');
 
 /**
  * Feed
@@ -22,6 +23,14 @@ Grabber.prototype.fetch = function() {
     var me = this;
     var http = require('http');
 
+    var cacheData = cache.get(this.srcUrl);
+
+    if (cacheData) {
+        this.srcBody = cacheData;
+        this.emit('fetchcomplete');
+        return;
+    }
+
     http.get(this.srcUrl, function (res) {
         var body = '';
 
@@ -32,6 +41,7 @@ Grabber.prototype.fetch = function() {
 
         res.on('end', function () {
             me.srcBody = body;
+            cache.put(me.srcUrl, body, 60000);
             me.emit('fetchcomplete');
         });
 
