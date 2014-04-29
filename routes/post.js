@@ -1,12 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var Post = require('../models/post');
+var Post = require('../models/Post');
 
 router.get('/:id', function (req, res) {
     var post = new Post();
     var id = req.params.id;
-
-    post.init(id);
 
     post.on('complete', function (data) {
         res.jsonp({
@@ -22,6 +20,7 @@ router.get('/:id', function (req, res) {
         });
     });
 
+    post.init(id);
     post.fetch();
 });
 

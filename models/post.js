@@ -1,44 +1,19 @@
+var Grabber = require('./Grabber');
 var cheerio = require('cheerio');
-var EventEmitter = require('events').EventEmitter;
 var extractCreateDate = require('../util').extractCreateDate;
 
 /**
  * Post
  */
 function Post() {
-    EventEmitter.call(this);
+    Grabber.call(this);
 }
 
-require('util').inherits(Post, EventEmitter);
+require('util').inherits(Post, Grabber);
 
 Post.prototype.init = function(id) {
     this.id = id;
     this.srcUrl = 'http://news.dbanotes.net/item?id=' + id;
-
-    this.on('fetchcomplete', this.parse);
-};
-
-// 先 copy 过来，跑起来再说
-Post.prototype.fetch = function() {
-    var me = this;
-    var http = require('http');
-
-    http.get(this.srcUrl, function (res) {
-        var body = '';
-
-        res.setEncoding('utf8');
-        res.on('data', function (chunk) {
-            body += chunk;
-        });
-
-        res.on('end', function () {
-            me.srcBody = body;
-            me.emit('fetchcomplete');
-        });
-
-    }).on('error', function (e) {
-        me.emit('error', e.message);
-    });
 };
 
 Post.prototype.parse = function() {
@@ -74,7 +49,7 @@ Post.prototype.parse = function() {
 
     // content
     var detailContent = detailItem.find('tr:nth-child(4) td:nth-child(2)').html();
-    if (detailContent.indexOf('<textarea') !== -1) {
+    if (!detailContent || detailContent.indexOf('<textarea') !== -1) {
         detailContent = '';
     }
     detail.content = detailContent;

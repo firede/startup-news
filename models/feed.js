@@ -1,15 +1,15 @@
+var Grabber = require('./Grabber');
 var cheerio = require('cheerio');
-var EventEmitter = require('events').EventEmitter;
 var extractCreateDate = require('../util').extractCreateDate;
 
 /**
  * Feed
  */
 function Feed() {
-    EventEmitter.call(this);
+    Grabber.call(this);
 }
 
-require('util').inherits(Feed, EventEmitter);
+require('util').inherits(Feed, Grabber);
 
 /**
  * 初始化Feed
@@ -24,33 +24,6 @@ Feed.prototype.init = function(type, page) {
     var urlIndexPath = type === 'newest' ? '/newest' : '/';
     var urlPath = page === '' ? urlIndexPath : '/x?fnid=' + page;
     this.srcUrl = 'http://news.dbanotes.net' + urlPath;
-
-    this.on('fetchcomplete', this.parse);
-};
-
-/**
- * 抓取页面
- */
-Feed.prototype.fetch = function() {
-    var me = this;
-    var http = require('http');
-
-    http.get(this.srcUrl, function (res) {
-        var body = '';
-
-        res.setEncoding('utf8');
-        res.on('data', function (chunk) {
-            body += chunk;
-        });
-
-        res.on('end', function () {
-            me.srcBody = body;
-            me.emit('fetchcomplete');
-        });
-
-    }).on('error', function (e) {
-        me.emit('error', e.message);
-    });
 };
 
 /**

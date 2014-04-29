@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Feed = require('../models/feed');
+var Feed = require('../models/Feed');
 
 router.get('/newest', function (req, res) {
     feedHandler(req, res, 'newest');
@@ -13,8 +13,6 @@ router.get('/hotest', function (req, res) {
 function feedHandler(req, res, type) {
     var feed = new Feed();
     var page = req.query.page || '';
-
-    feed.init(type, page);
 
     feed.on('complete', function (data) {
         res.jsonp({
@@ -30,6 +28,7 @@ function feedHandler(req, res, type) {
         });
     });
 
+    feed.init(type, page);
     feed.fetch();
 }
 
